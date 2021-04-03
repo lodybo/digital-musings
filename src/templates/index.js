@@ -21,14 +21,25 @@ const Index = ({ data, location, pageContext }) => {
     <>
       <MetaData location={location} />
       <PageLayout>
-        <div className="container">
-          <section className="post-feed">
+        <div
+          className="
+            p-10
+          "
+        >
+          <section
+            className="
+              grid
+              grid-cols-1
+              xl:grid-cols-2
+            "
+          >
             {posts.map(({ node }) => (
               // The tag below includes the markup for each post - components/common/PostCard.tsx
               <PostCard key={node.id} post={node} />
             ))}
+
+            <Pagination pageContext={pageContext} />
           </section>
-          <Pagination pageContext={pageContext} />
         </div>
       </PageLayout>
     </>

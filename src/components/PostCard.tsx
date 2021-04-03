@@ -17,13 +17,16 @@ const PostCard = ({ post }: Props): JSX.Element => {
     <Link
       to={url}
       className="
+      group
         flex
         flex-col
         sm:flex-row
         p-10
         cursor-pointer
         transition-all
-        sm:hover:ml-1
+        shadow-none
+        sm:hover:shadow
+        sm:hover:ml-0.5
         sm:hover:bg-primary-dark
       "
     >
@@ -70,6 +73,7 @@ const PostCard = ({ post }: Props): JSX.Element => {
             justify-between
             text-sm
             text-secondary-dark
+            sm:group-hover:text-black-light
           "
         >
           {post.tags && (

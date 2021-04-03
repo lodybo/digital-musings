@@ -9,7 +9,7 @@ type Props = {
   children: ReactNode;
 };
 
-const PageLayout = ({ children }: Props) => {
+const PageLayout = ({ children }: Props): JSX.Element => {
   const { lang, codeinjection_styles } = useGhostSettings();
 
   return (
