@@ -2,3 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  h1 {
+    @apply text-2xl font-heading;
+  }
+
+  h2 {
+    @apply text-xl font-heading;
+  }
+
+  h3 {
+    @apply text-lg font-heading;
+  }
+
+  h4 {
+    @apply text-base font-heading;
+  }
+
+  h5 {
+    @apply text-sm font-heading;
+  }
+
+  h6 {
+    @apply text-xs font-heading;
+  }
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}

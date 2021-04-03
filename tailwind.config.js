@@ -1,7 +1,5 @@
 module.exports = {
-  purge: [
-    './src/**/*.{js,jsx,ts,tsx}'
-  ],
+  purge: ['./src/**/*.tsx'],
   darkMode: 'class',
   theme: {
     colors: {
@@ -50,15 +48,18 @@ module.exports = {
       },
     },
     fontFamily: {
-      title: [ '"Bungee Shade"', 'sans' ],
-      heading: [ 'Bungee', 'sans' ],
-      body: [ '"Roboto Slab"', 'sans-serif' ],
-      code: [ '"Roboto Mono"', 'monospace' ],
+      title: ['"Bungee Shade"', 'sans'],
+      heading: ['Bungee', 'sans'],
+      body: ['"Roboto Slab"', 'sans-serif'],
+      code: ['"Roboto Mono"', 'monospace'],
     },
   },
-  variants: {},
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
-  ],
+  variants: {
+    extend: {
+      margin: ['hover'],
+      padding: ['hover'],
+    },
+    zIndex: false,
+  },
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
 };

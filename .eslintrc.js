@@ -1,5 +1,5 @@
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 6,
     ecmaFeatures: {
@@ -7,8 +7,9 @@ module.exports = {
       experimentalObjectRestSpread: true,
     },
   },
-  plugins: ['ghost', 'react', 'jsx-a11y'],
+  plugins: ['ghost', 'react', 'jsx-a11y', '@typescript-eslint'],
   extends: [
+    'plugin:@typescript-eslint/recommended',
     'plugin:ghost/node',
     'plugin:ghost/ember',
     'plugin:react/recommended',
@@ -25,6 +26,22 @@ module.exports = {
   },
   rules: {
     indent: ['error', 2],
+    camelcase: [
+      'error',
+      {
+        allow: [
+          '^codeinjection',
+          'short_name',
+          'start_url',
+          'background_color',
+          'theme_color',
+          'feature_image',
+          'primary_author',
+          'profile_image',
+          'cover_image',
+        ],
+      },
+    ],
     'ghost/sort-imports-es6-autofix/sort-imports-es6': 'off',
     'ghost/ember/use-ember-get-and-set': 'off',
     'no-console': 'off',
@@ -42,6 +59,9 @@ module.exports = {
       'as-needed',
       { requireReturnForObjectLiteral: true },
     ],
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': ['error'],
+    'no-undef': 'off',
     'jsx-quotes': ['error', 'prefer-double'],
     semi: ['error', 'always'],
     'object-curly-spacing': ['error', 'always'],
