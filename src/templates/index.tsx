@@ -11,7 +11,7 @@ import { MetaData } from '../components/common/meta';
  *
  * Loads all posts from Ghost and uses pagination to navigate through them.
  * The number of posts that should appear per page can be setup
- * in /utils/siteConfig.js under `postsPerPage`.
+ * in /utils/siteConfig.ts under `postsPerPage`.
  *
  */
 const Index = ({ data, location, pageContext }) => {
