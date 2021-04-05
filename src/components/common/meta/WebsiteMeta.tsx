@@ -1,23 +1,31 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { StaticQuery, graphql } from 'gatsby';
 import url from 'url';
 
 import ImageMeta from './ImageMeta';
 import config from '../../../utils/siteConfig';
+import { PostOrPage, Tag } from '@tryghost/content-api';
+import { useGhostSettings } from '../hooks/ghostSettings';
+
+type Props = {
+  data: PostOrPage | Tag;
+  canonical: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  type: 'WebSite' | 'Series';
+};
 
 const WebsiteMeta = ({
   data,
-  settings,
   canonical,
   title,
   description,
   image,
   type,
-}) => {
-  settings = settings.allGhostSettings.edges[0].node;
+}: Props): JSX.Element => {
+  const settings = useGhostSettings();
 
   const publisherLogo = url.resolve(
     config.siteUrl,
@@ -31,25 +39,27 @@ const WebsiteMeta = ({
   description =
     description ||
     data.meta_description ||
-    data.description ||
+    (data as Tag).description ||
     config.siteDescriptionMeta ||
     settings.description;
-  title = `${title || data.meta_title || data.name || data.title} - ${
-    settings.title
-  }`;
+  title = `${
+    title || data.meta_title || (data as Tag).name || (data as PostOrPage).title
+  } - ${settings.title}`;
 
   const jsonLd = {
     '@context': 'https://schema.org/',
     '@type': type,
     url: canonical,
     image: shareImage
-      ? {
+      ? /* eslint-disable indent */
+        {
           '@type': 'ImageObject',
           url: shareImage,
           width: config.shareImageWidth,
           height: config.shareImageHeight,
         }
       : undefined,
+    /* eslint-enable indent */
     publisher: {
       '@type': 'Organization',
       name: settings.title,
@@ -97,51 +107,9 @@ const WebsiteMeta = ({
           {JSON.stringify(jsonLd, undefined, 4)}
         </script>
       </Helmet>
-      <ImageMeta image={shareImage} />
+      <ImageMeta image={shareImage || ''} />
     </>
   );
 };
 
-WebsiteMeta.propTypes = {
-  data: PropTypes.shape({
-    title: PropTypes.string,
-    meta_title: PropTypes.string,
-    meta_description: PropTypes.string,
-    name: PropTypes.string,
-    feature_image: PropTypes.string,
-    description: PropTypes.string,
-    bio: PropTypes.string,
-    profile_image: PropTypes.string,
-  }).isRequired,
-  settings: PropTypes.shape({
-    logo: PropTypes.object,
-    description: PropTypes.string,
-    title: PropTypes.string,
-    twitter: PropTypes.string,
-    allGhostSettings: PropTypes.object.isRequired,
-  }).isRequired,
-  canonical: PropTypes.string.isRequired,
-  title: PropTypes.string,
-  description: PropTypes.string,
-  image: PropTypes.string,
-  type: PropTypes.oneOf(['WebSite', 'Series']).isRequired,
-};
-
-const WebsiteMetaQuery = (props) => (
-  <StaticQuery
-    query={graphql`
-      query GhostSettingsWebsiteMeta {
-        allGhostSettings {
-          edges {
-            node {
-              ...GhostSettingsFields
-            }
-          }
-        }
-      }
-    `}
-    render={(data) => <WebsiteMeta settings={data} {...props} />}
-  />
-);
-
-export default WebsiteMetaQuery;
+export default WebsiteMeta;

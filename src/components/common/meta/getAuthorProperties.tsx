@@ -1,45 +1,40 @@
 import _ from 'lodash';
-import PropTypes from 'prop-types';
+import { Author } from '@tryghost/content-api';
 
-export const getAuthorProperties = (primaryAuthor) => {
+type AuthorProperties = {
+  name: string | null;
+  sameAsArray: string | null;
+  image: string | null;
+  facebookUrl: string | null;
+};
+
+export const getAuthorProperties = ({
+  website,
+  twitter,
+  facebook,
+  name,
+  profile_image,
+}: Author): AuthorProperties => {
   let authorProfiles = [];
 
   authorProfiles.push(
-    primaryAuthor.website ? primaryAuthor.website : null,
-    primaryAuthor.twitter
-      ? `https://twitter.com/${primaryAuthor.twitter.replace(/^@/, '')}/`
-      : null,
-    primaryAuthor.facebook
-      ? `https://www.facebook.com/${primaryAuthor.facebook.replace(/^\//, '')}/`
-      : null
+    website ? website : null,
+    twitter ? `https://twitter.com/${twitter.replace(/^@/, '')}/` : null,
+    facebook ? `https://www.facebook.com/${facebook.replace(/^\//, '')}/` : null
   );
 
   authorProfiles = _.compact(authorProfiles);
 
   return {
-    name: primaryAuthor.name || null,
+    name: name || null,
     sameAsArray: authorProfiles.length
       ? `["${_.join(authorProfiles, '", "')}"]`
       : null,
-    image: primaryAuthor.profile_image || null,
-    facebookUrl: primaryAuthor.facebook
-      ? `https://www.facebook.com/${primaryAuthor.facebook.replace(/^\//, '')}/`
+    image: profile_image || null,
+    facebookUrl: facebook
+      ? `https://www.facebook.com/${facebook.replace(/^\//, '')}/`
       : null,
   };
-};
-
-getAuthorProperties.defaultProps = {
-  fetchAuthorData: false,
-};
-
-getAuthorProperties.PropTypes = {
-  primaryAuthor: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    profile_image: PropTypes.string,
-    website: PropTypes.string,
-    twitter: PropTypes.string,
-    facebook: PropTypes.string,
-  }).isRequired,
 };
 
 export default getAuthorProperties;

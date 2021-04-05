@@ -94,20 +94,18 @@ declare module '@tryghost/helpers' {
    * @param {function} [options.fn] - function to call on each tag, default returns tag.name
    * @returns {String|*} processed tags, comma separated names by default
    */
-  export interface tags {
-    (
-      data: Tag[],
-      options: {
-        limit: string;
-        from: number;
-        to: number;
-        separator: string;
-        prefix: string;
-        suffix: string;
-        visibility: 'public' | 'all' | 'internal';
-        fallback: Record<string, unknown>;
-        fn: (tag: Tag) => JSX.Element;
-      }
-    ): string;
-  }
+  export function tags(
+    data: PostOrPage,
+    options: {
+      limit?: string;
+      from?: number;
+      to?: number;
+      separator?: string;
+      prefix?: string;
+      suffix?: string;
+      visibility?: 'public' | 'all' | 'internal';
+      fallback?: Record<string, unknown>;
+      fn?: (tag: Tag) => Tag;
+    }
+  ): string;
 }

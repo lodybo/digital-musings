@@ -1,15 +1,20 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { StaticQuery, graphql } from 'gatsby';
 
 import ImageMeta from './ImageMeta';
 import getAuthorProperties from './getAuthorProperties';
 import config from '../../../utils/siteConfig';
+import { Author } from '@tryghost/content-api';
+import { useGhostSettings } from '../hooks/ghostSettings';
 
-const AuthorMeta = ({ data, settings, canonical }) => {
-  settings = settings.allGhostSettings.edges[0].node;
+type Props = {
+  data: Author;
+  canonical: string;
+};
+
+const AuthorMeta = ({ data, canonical }: Props): JSX.Element => {
+  const settings = useGhostSettings();
 
   const author = getAuthorProperties(data);
   const shareImage = author.image || _.get(settings, 'cover_image', null);
@@ -24,13 +29,15 @@ const AuthorMeta = ({ data, settings, canonical }) => {
     sameAs: author.sameAsArray ? author.sameAsArray : undefined,
     url: canonical,
     image: shareImage
-      ? {
+      ? /* eslint-disable indent */
+        {
           '@type': 'ImageObject',
           url: shareImage,
           width: config.shareImageWidth,
           height: config.shareImageHeight,
         }
       : undefined,
+    /* eslint-enable indent */
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': config.siteUrl,
@@ -73,39 +80,4 @@ const AuthorMeta = ({ data, settings, canonical }) => {
   );
 };
 
-AuthorMeta.propTypes = {
-  data: PropTypes.shape({
-    name: PropTypes.string,
-    bio: PropTypes.string,
-    profile_image: PropTypes.string,
-    website: PropTypes.string,
-    twitter: PropTypes.string,
-    facebook: PropTypes.string,
-  }).isRequired,
-  settings: PropTypes.shape({
-    title: PropTypes.string,
-    twitter: PropTypes.string,
-    description: PropTypes.string,
-    allGhostSettings: PropTypes.object.isRequired,
-  }).isRequired,
-  canonical: PropTypes.string.isRequired,
-};
-
-const AuthorMetaQuery = (props) => (
-  <StaticQuery
-    query={graphql`
-      query GhostSettingsAuthorMeta {
-        allGhostSettings {
-          edges {
-            node {
-              ...GhostSettingsFields
-            }
-          }
-        }
-      }
-    `}
-    render={(data) => <AuthorMeta settings={data} {...props} />}
-  />
-);
-
-export default AuthorMetaQuery;
+export default AuthorMeta;

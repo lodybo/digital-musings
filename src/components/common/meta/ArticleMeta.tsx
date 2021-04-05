@@ -1,34 +1,23 @@
-/* eslint-disable */
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { StaticQuery, graphql } from 'gatsby';
 import _ from 'lodash';
 import url from 'url';
 
 import getAuthorProperties from './getAuthorProperties';
 import ImageMeta from './ImageMeta';
 import config from '../../../utils/siteConfig';
-import { PostOrPage, Settings, Tag } from '@tryghost/content-api';
+import { PostOrPage, Tag } from '@tryghost/content-api';
+import { useGhostSettings } from '../hooks/ghostSettings';
+import { tags as tagsHelper } from '@tryghost/helpers';
 
 type Props = {
-  data?: PostOrPage;
-  settings?: {
-    allGhostSettings: {
-      edges: Array<{
-        node: Settings;
-      }>;
-    };
-  };
-  canonical?: string;
+  data: PostOrPage;
+  canonical: string;
 };
 
-const ArticleMetaGhost = ({
-  data,
-  settings,
-  canonical,
-}: Props): JSX.Element => {
+const ArticleMetaGhost = ({ data, canonical }: Props): JSX.Element => {
   const ghostPost = data;
-  settings = settings.allGhostSettings.edges[0].node;
+  const settings = useGhostSettings();
 
   const author = getAuthorProperties(ghostPost.primary_author);
   const publicTags = _.map(
@@ -59,13 +48,15 @@ const ArticleMetaGhost = ({
     datePublished: ghostPost.published_at,
     dateModified: ghostPost.updated_at,
     image: shareImage
-      ? {
+      ? /* eslint-disable indent */
+        {
           '@type': 'ImageObject',
           url: shareImage,
           width: config.shareImageWidth,
           height: config.shareImageHeight,
         }
       : undefined,
+    /* eslint-enable indent */
     publisher: {
       '@type': 'Organization',
       name: settings.title,
@@ -106,15 +97,19 @@ const ArticleMetaGhost = ({
           content={
             ghostPost.og_description ||
             ghostPost.excerpt ||
-            ghostPost.meta_description
+            ghostPost.meta_description ||
+            undefined
           }
         />
         <meta property="og:url" content={canonical} />
         <meta
           property="article:published_time"
-          content={ghostPost.published_at}
+          content={ghostPost.published_at || undefined}
         />
-        <meta property="article:modified_time" content={ghostPost.updated_at} />
+        <meta
+          property="article:modified_time"
+          content={ghostPost.updated_at || undefined}
+        />
         {publicTags.map((keyword, i) => (
           <meta property="article:tag" content={keyword} key={i} />
         ))}
@@ -133,7 +128,8 @@ const ArticleMetaGhost = ({
           content={
             ghostPost.twitter_description ||
             ghostPost.excerpt ||
-            ghostPost.meta_description
+            ghostPost.meta_description ||
+            undefined
           }
         />
         <meta name="twitter:url" content={canonical} />
@@ -163,21 +159,4 @@ const ArticleMetaGhost = ({
   );
 };
 
-const ArticleMetaQuery = (props: Props): JSX.Element => (
-  <StaticQuery
-    query={graphql`
-      query GhostSettingsArticleMeta {
-        allGhostSettings {
-          edges {
-            node {
-              ...GhostSettingsFields
-            }
-          }
-        }
-      }
-    `}
-    render={(data) => <ArticleMetaGhost settings={data} {...props} />}
-  />
-);
-
-export default ArticleMetaQuery;
+export default ArticleMetaGhost;
