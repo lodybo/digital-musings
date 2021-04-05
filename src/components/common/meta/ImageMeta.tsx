@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import config from '../../../utils/siteConfig';
 
 type Props = {
-  image: string;
+  image: string | null;
 };
 
 const ImageMeta = ({ image }: Props): JSX.Element | null => {

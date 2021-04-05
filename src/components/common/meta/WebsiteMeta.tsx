@@ -9,11 +9,11 @@ import { PostOrPage, Tag } from '@tryghost/content-api';
 import { useGhostSettings } from '../hooks/ghostSettings';
 
 type Props = {
-  data: PostOrPage | Tag;
+  data: PostOrPage | Tag | Record<string, string>;
   canonical: string;
   title?: string;
   description?: string;
-  image?: string;
+  image?: string | null;
   type: 'WebSite' | 'Series';
 };
 

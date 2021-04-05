@@ -9,6 +9,7 @@ import config from '../../../utils/siteConfig';
 import { PostOrPage, Tag } from '@tryghost/content-api';
 import { useGhostSettings } from '../hooks/ghostSettings';
 import { tags as tagsHelper } from '@tryghost/helpers';
+import { useGhostAuthor } from '../hooks/ghostAuthor';
 
 type Props = {
   data: PostOrPage;
@@ -19,7 +20,7 @@ const ArticleMetaGhost = ({ data, canonical }: Props): JSX.Element => {
   const ghostPost = data;
   const settings = useGhostSettings();
 
-  const author = getAuthorProperties(ghostPost.primary_author);
+  const author = getAuthorProperties(useGhostAuthor());
   const publicTags = _.map(
     tagsHelper(ghostPost, { visibility: 'public', fn: (tag: Tag) => tag }),
     'name'
@@ -134,7 +135,7 @@ const ArticleMetaGhost = ({ data, canonical }: Props): JSX.Element => {
         />
         <meta name="twitter:url" content={canonical} />
         <meta name="twitter:label1" content="Written by" />
-        <meta name="twitter:data1" content={author.name} />
+        <meta name="twitter:data1" content={author.name || ''} />
         {primaryTag && <meta name="twitter:label2" content="Filed under" />}
         {primaryTag && <meta name="twitter:data2" content={primaryTag} />}
 
