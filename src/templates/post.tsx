@@ -5,6 +5,12 @@ import { Helmet } from 'react-helmet';
 import { PostLayout } from '../components/common';
 import { MetaData } from '../components/common/meta';
 import { PostOrPage } from '@tryghost/content-api';
+import PostMeta from '../components/PostMeta';
+
+/**
+ * Todo: Check if images in a post are processed via Gatsby.
+ * Also refactor to new image plugin: https://www.gatsbyjs.com/docs/how-to/images-and-media/using-gatsby-plugin-image
+ */
 
 type Props = {
   data: {
@@ -56,22 +62,37 @@ const Post = ({ data, location }: Props): JSX.Element => {
 
           <section
             className="
-              prose
-              prose-sm
               w-full
               mx-auto
               px-8
               md:w-3/4
-              sm:prose
-              md:prose-lg
-              lg:prose-xl
-              xl:prose-2xl
             "
           >
-            <h1>{post.title}</h1>
+            <h1
+              className="
+                prose
+                prose-sm
+                sm:prose
+                md:prose-lg
+                lg:prose-xl
+                xl:prose-2xl
+              "
+            >
+              {post.title}
+            </h1>
+
+            <PostMeta author={post.primary_author} post={post} />
 
             <section
-              className="load-external-scripts"
+              className="
+                load-external-scripts
+                prose
+                prose-sm
+                sm:prose
+                md:prose-lg
+                lg:prose-xl
+                xl:prose-2xl
+              "
               dangerouslySetInnerHTML={{ __html: post.html || '' }}
             />
           </section>
