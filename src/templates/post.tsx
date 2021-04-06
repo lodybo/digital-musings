@@ -1,71 +1,92 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
-import { Helmet } from 'react-helmet'
+import React from 'react';
+import { graphql } from 'gatsby';
+import { Helmet } from 'react-helmet';
 
-import { Layout } from '../components/common'
-import { MetaData } from '../components/common/meta'
+import { PostLayout } from '../components/common';
+import { MetaData } from '../components/common/meta';
+import { PostOrPage } from '@tryghost/content-api';
+
+type Props = {
+  data: {
+    ghostPost: PostOrPage;
+  };
+  location: {
+    pathname: string;
+  };
+};
 
 /**
-* Single post view (/:slug)
-*
-* This file renders a single post and loads all the content.
-*
-*/
-const Post = ({ data, location }) => {
-    const post = data.ghostPost
+ * Single post view (/:slug)
+ *
+ * This file renders a single post and loads all the content.
+ *
+ */
+const Post = ({ data, location }: Props): JSX.Element => {
+  const post = data.ghostPost;
 
-    return (
-        <>
-            <MetaData
-                data={data}
-                location={location}
-                type="article"
+  return (
+    <>
+      <MetaData data={post} location={location} />
+      <Helmet>
+        <style type="text/css">{`${post.codeinjection_styles}`}</style>
+      </Helmet>
+      <PostLayout>
+        <article className="content">
+          {post.feature_image ? (
+            <figure
+              className="
+                w-full
+                sm:h-48
+                md:h-96
+                lg:h-1/4
+                mb-8
+              "
+            >
+              <img
+                className="
+                  h-full
+                  w-full
+                  object-cover
+                "
+                src={post.feature_image}
+                alt={post.title}
+              />
+            </figure>
+          ) : null}
+
+          <section
+            className="
+              prose
+              prose-sm
+              w-full
+              mx-auto
+              px-8
+              md:w-3/4
+              sm:prose
+              md:prose-lg
+              lg:prose-xl
+              xl:prose-2xl
+            "
+          >
+            <h1>{post.title}</h1>
+
+            <section
+              className="load-external-scripts"
+              dangerouslySetInnerHTML={{ __html: post.html || '' }}
             />
-            <Helmet>
-                <style type="text/css">{`${post.codeinjection_styles}`}</style>
-            </Helmet>
-            <Layout>
-                <div className="container">
-                    <article className="content">
-                        { post.feature_image ?
-                            <figure className="post-feature-image">
-                                <img src={ post.feature_image } alt={ post.title } />
-                            </figure> : null }
-                        <section className="post-full-content">
-                            <h1 className="content-title">{post.title}</h1>
+          </section>
+        </article>
+      </PostLayout>
+    </>
+  );
+};
 
-                            {/* The main post content */ }
-                            <section
-                                className="content-body load-external-scripts"
-                                dangerouslySetInnerHTML={{ __html: post.html }}
-                            />
-                        </section>
-                    </article>
-                </div>
-            </Layout>
-        </>
-    )
-}
-
-Post.propTypes = {
-    data: PropTypes.shape({
-        ghostPost: PropTypes.shape({
-            codeinjection_styles: PropTypes.object,
-            title: PropTypes.string.isRequired,
-            html: PropTypes.string.isRequired,
-            feature_image: PropTypes.string,
-        }).isRequired,
-    }).isRequired,
-    location: PropTypes.object.isRequired,
-}
-
-export default Post
+export default Post;
 
 export const postQuery = graphql`
-    query($slug: String!) {
-        ghostPost(slug: { eq: $slug }) {
-            ...GhostPostFields
-        }
+  query($slug: String!) {
+    ghostPost(slug: { eq: $slug }) {
+      ...GhostPostFields
     }
-`
+  }
+`;

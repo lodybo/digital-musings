@@ -3,14 +3,12 @@ import { Helmet } from 'react-helmet';
 import { useGhostSettings } from './hooks/ghostSettings';
 
 import '../../styles/global.css';
-import Header from '../Header';
 
 type Props = {
-  title: string;
   children: ReactNode;
 };
 
-const PageLayout = ({ title, children }: Props): JSX.Element => {
+const PostLayout = ({ children }: Props): JSX.Element => {
   const {
     lang,
     codeinjection_styles,
@@ -33,8 +31,6 @@ const PageLayout = ({ title, children }: Props): JSX.Element => {
         />
       </Helmet>
 
-      <Header title={title} />
-
       <main>{children}</main>
 
       <footer
@@ -55,4 +51,4 @@ const PageLayout = ({ title, children }: Props): JSX.Element => {
   );
 };
 
-export default PageLayout;
+export default PostLayout;

@@ -8,23 +8,27 @@ import AuthorMeta from './AuthorMeta';
 import { Author, GhostData, PostOrPage, Tag } from '@tryghost/content-api';
 import { useGhostSettings } from '../hooks/ghostSettings';
 
-const dataIsPost = (data: GhostData): data is PostOrPage =>
-  Object.prototype.hasOwnProperty.call(data, 'created_at') &&
-  !(data as PostOrPage).page;
+const dataIsPost = (data: GhostData | undefined): data is PostOrPage =>
+  data
+    ? Object.prototype.hasOwnProperty.call(data, 'created_at') &&
+      !(data as PostOrPage).page
+    : false;
 
-const dataIsPage = (data: GhostData): data is PostOrPage =>
-  Object.prototype.hasOwnProperty.call(data, 'created_at') &&
-  (data as PostOrPage).page !== undefined &&
-  (data as PostOrPage).page === true;
+const dataIsPage = (data: GhostData | undefined): data is PostOrPage =>
+  data
+    ? Object.prototype.hasOwnProperty.call(data, 'created_at') &&
+      (data as PostOrPage).page !== undefined &&
+      (data as PostOrPage).page === true
+    : false;
 
-const dataIsTag = (data: GhostData): data is Tag =>
-  Object.prototype.hasOwnProperty.call(data, 'name');
+const dataIsTag = (data: GhostData | undefined): data is Tag =>
+  data ? Object.prototype.hasOwnProperty.call(data, 'name') : false;
 
-const dataIsAuthor = (data: GhostData): data is Author =>
-  Object.prototype.hasOwnProperty.call(data, 'bio');
+const dataIsAuthor = (data: GhostData | undefined): data is Author =>
+  data ? Object.prototype.hasOwnProperty.call(data, 'bio') : false;
 
 type Props = {
-  data: GhostData;
+  data?: GhostData;
   location: {
     pathname: string;
   };

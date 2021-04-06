@@ -2,17 +2,19 @@ import React from 'react';
 import { Link } from 'gatsby';
 import classNames from 'classnames';
 
+export type PaginationContext = {
+  humanPageNumber: number;
+  limit: number;
+  nextPagePath: string;
+  numberOfPages: number;
+  pageNumber: number;
+  previousPagePath: string;
+  skip: number;
+  slug: string;
+};
+
 type Props = {
-  pageContext: {
-    humanPageNumber: number;
-    limit: number;
-    nextPagePath: string;
-    numberOfPages: number;
-    pageNumber: number;
-    previousPagePath: string;
-    skip: number;
-    slug: string;
-  };
+  pageContext: PaginationContext;
 };
 
 const Pagination = ({ pageContext }: Props): JSX.Element | null => {

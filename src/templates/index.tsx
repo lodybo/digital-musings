@@ -1,10 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
 import { PageLayout, Pagination } from '../components/common';
 import PostCard from '../components/PostCard';
 import { MetaData } from '../components/common/meta';
+import { PostOrPage } from '@tryghost/content-api';
+import { PaginationContext } from '../components/common/Pagination';
+import { useGhostSettings } from '../components/common/hooks/ghostSettings';
+
+type Props = {
+  data: {
+    allGhostPost: {
+      edges: Array<{
+        node: PostOrPage;
+      }>;
+    };
+  };
+  location: {
+    pathname: string;
+  };
+  pageContext: PaginationContext;
+};
 
 /**
  * Main index page (home page)
@@ -14,13 +30,14 @@ import { MetaData } from '../components/common/meta';
  * in /utils/siteConfig.ts under `postsPerPage`.
  *
  */
-const Index = ({ data, location, pageContext }) => {
+const Index = ({ data, location, pageContext }: Props): JSX.Element => {
+  const { title } = useGhostSettings();
   const posts = data.allGhostPost.edges;
 
   return (
     <>
       <MetaData location={location} />
-      <PageLayout>
+      <PageLayout title={title || ''}>
         <div
           className="
             p-10
@@ -44,16 +61,6 @@ const Index = ({ data, location, pageContext }) => {
       </PageLayout>
     </>
   );
-};
-
-Index.propTypes = {
-  data: PropTypes.shape({
-    allGhostPost: PropTypes.object.isRequired,
-  }).isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-  }).isRequired,
-  pageContext: PropTypes.object,
 };
 
 export default Index;
