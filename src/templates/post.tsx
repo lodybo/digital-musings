@@ -44,7 +44,6 @@ const Post = ({ data, location }: Props): JSX.Element => {
                 w-full
                 sm:h-48
                 md:h-96
-                lg:h-1/4
                 mb-8
               "
             >
@@ -70,12 +69,9 @@ const Post = ({ data, location }: Props): JSX.Element => {
           >
             <h1
               className="
-                prose
-                prose-sm
-                sm:prose
-                md:prose-lg
-                lg:prose-xl
-                xl:prose-2xl
+                sm:text-4xl
+                md:text-5xl
+                lg:text-6xl
               "
             >
               {post.title}
@@ -86,9 +82,9 @@ const Post = ({ data, location }: Props): JSX.Element => {
             <section
               className="
                 load-external-scripts
+                max-w-none
                 prose
                 prose-sm
-                sm:prose
                 md:prose-lg
                 lg:prose-xl
                 xl:prose-2xl
