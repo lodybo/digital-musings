@@ -1,9 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
+import { PostOrPage, Tag as GhostTag } from '@tryghost/content-api';
 
-import { Layout, PostCard, Pagination } from '../components/common';
+import { Pagination, PageLayout } from '../components/common';
 import { MetaData } from '../components/common/meta';
+import PostCard from '../components/PostCard';
+import { PaginationContext } from '../components/common/Pagination';
+
+type Props = {
+  data: {
+    ghostTag: GhostTag;
+    allGhostPost: {
+      edges: Array<{
+        node: PostOrPage;
+      }>;
+    };
+  };
+  location: {
+    pathname: string;
+  };
+  pageContext: PaginationContext;
+};
 
 /**
  * Tag page (/tag/:slug)
@@ -11,44 +28,36 @@ import { MetaData } from '../components/common/meta';
  * Loads all posts for the requested tag incl. pagination.
  *
  */
-const Tag = ({ data, location, pageContext }) => {
+const Tag = ({ data, location, pageContext }: Props): JSX.Element => {
   const tag = data.ghostTag;
   const posts = data.allGhostPost.edges;
 
   return (
     <>
-      <MetaData data={data} location={location} type="series" />
-      <Layout>
-        <div className="container">
-          <header className="tag-header">
-            <h1>{tag.name}</h1>
+      <MetaData data={tag} location={location} />
+      <PageLayout title={tag.name || ''}>
+        <div>
+          <header
+            className="
+              py-2.5
+              px-10
+              text-lg
+              sm:text-xl
+              md:text-2xl
+            "
+          >
             {tag.description ? <p>{tag.description}</p> : null}
           </header>
-          <section className="post-feed">
+          <section>
             {posts.map(({ node }) => (
-              // The tag below includes the markup for each post - components/common/PostCard.tsx
               <PostCard key={node.id} post={node} />
             ))}
           </section>
           <Pagination pageContext={pageContext} />
         </div>
-      </Layout>
+      </PageLayout>
     </>
   );
-};
-
-Tag.propTypes = {
-  data: PropTypes.shape({
-    ghostTag: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string,
-    }),
-    allGhostPost: PropTypes.object.isRequired,
-  }).isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-  }).isRequired,
-  pageContext: PropTypes.object,
 };
 
 export default Tag;

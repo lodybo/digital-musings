@@ -150,7 +150,7 @@ const PostMeta = ({ author, post }: Props): JSX.Element => {
                         cursor-pointer
                         hover:bg-tertiary-dark
                       "
-                      to={`/${tag.slug}`}
+                      to={`/tag/${tag.slug}`}
                     >
                       {tag.name}
                     </Link>
