@@ -76,8 +76,10 @@ const PostCard = ({ post }: Props): JSX.Element => {
             sm:group-hover:text-black-light
           "
         >
-          {post.tags && (
-            <Tags post={post} visibility="public" autolink={false} />
+          {post.tags && post.tags.length > 0 && (
+            <div>
+              <Tags post={post} visibility="public" autolink={false} />
+            </div>
           )}
           <p>{readingTime}</p>
         </footer>

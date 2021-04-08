@@ -2,6 +2,15 @@ module.exports = {
   purge: ['./src/**/*.tsx'],
   darkMode: 'class',
   theme: {
+    extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.black'),
+          },
+        },
+      }),
+    },
     colors: {
       primary: {
         light: '#EEF9FB',

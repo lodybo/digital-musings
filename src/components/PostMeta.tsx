@@ -1,9 +1,9 @@
 import React from 'react';
 import { Author, Nullable, PostOrPage } from '@tryghost/content-api';
-import { Link } from 'gatsby';
 import { readingTime } from '@tryghost/helpers';
 import classNames from 'classnames';
 import isEqual from 'date-fns/isEqual';
+import { Tags } from '@tryghost/helpers-gatsby';
 
 type Props = {
   author?: Nullable<Author>;
@@ -99,13 +99,18 @@ const PostMeta = ({ author, post }: Props): JSX.Element => {
       <div
         className="
           flex
-          flex-row
+          flex-col
+          sm:flex-row
           justify-between
+          items-start
+          sm:items-center
         "
       >
         <p
           className="
             text-secondary-dark
+            mb-2
+            sm:mb-0
           "
         >
           Reading time: <br />
@@ -121,45 +126,16 @@ const PostMeta = ({ author, post }: Props): JSX.Element => {
           </span>
         </p>
 
-        <ul
-          className="
-            flex
-            flex-col
-            sm:flex-row
-            mt-4
-            sm:mt-0
-          "
-        >
-          {
-            post.tags
-              ? /* eslint-disable indent */
-                post.tags.map((tag) => (
-                  <li key={tag.id}>
-                    <Link
-                      className="
-                        text-sm
-                        bg-tertiary-light
-                        text-primary-light
-                        rounded-full
-                        inline-block
-                        px-4
-                        mb-2
-                        mx-0
-                        sm:mb-0
-                        sm:mx-2
-                        cursor-pointer
-                        hover:bg-tertiary-dark
-                      "
-                      to={`/tag/${tag.slug}`}
-                    >
-                      {tag.name}
-                    </Link>
-                  </li>
-                ))
-              : null
-            /* eslint-enable indent */
-          }
-        </ul>
+        {post.tags && post.tags.length > 0 && (
+          <div>
+            <Tags
+              post={post}
+              visibility="public"
+              permalink="/tag/:slug"
+              separator="&nbsp;|&nbsp;"
+            />
+          </div>
+        )}
       </div>
     </div>
   );

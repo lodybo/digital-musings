@@ -69,7 +69,7 @@ module.exports = {
     'arrow-body-style': [
       'error',
       'as-needed',
-      { requireReturnForObjectLiteral: true },
+      { requireReturnForObjectLiteral: false },
     ],
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
