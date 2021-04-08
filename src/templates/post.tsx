@@ -37,14 +37,13 @@ const Post = ({ data, location }: Props): JSX.Element => {
         <style type="text/css">{`${post.codeinjection_styles}`}</style>
       </Helmet>
       <PostLayout>
-        <article className="content">
+        <article>
           {post.feature_image ? (
             <figure
               className="
                 w-full
                 sm:h-48
                 md:h-96
-                mb-8
               "
             >
               <img
@@ -62,6 +61,7 @@ const Post = ({ data, location }: Props): JSX.Element => {
           <section
             className="
               w-full
+              mt-8
               mx-auto
               px-8
               md:w-3/4
