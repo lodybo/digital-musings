@@ -30,7 +30,7 @@ type Props = {
  * in /utils/siteConfig.ts under `postsPerPage`.
  *
  */
-const Index = ({ data, location, pageContext }: Props): JSX.Element => {
+const Wrote = ({ data, location, pageContext }: Props): JSX.Element => {
   const { title } = useGhostSettings();
   const posts = data.allGhostPost.edges;
 
@@ -63,7 +63,7 @@ const Index = ({ data, location, pageContext }: Props): JSX.Element => {
   );
 };
 
-export default Index;
+export default Wrote;
 
 // This page query loads all posts sorted descending by published date
 // The `limit` and `skip` values are used for pagination

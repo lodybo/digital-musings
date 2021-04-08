@@ -2,15 +2,19 @@ import { Author } from '@tryghost/content-api';
 import { graphql, useStaticQuery } from 'gatsby';
 
 export const useGhostAuthor = (): Author => {
-  const { author } = useStaticQuery(
+  const { authors } = useStaticQuery(
     graphql`
       query {
-        author: ghostAuthor {
-          ...GhostAuthorFields
+        authors: allGhostAuthor(filter: { name: { eq: "Lody Borgers" } }) {
+          edges {
+            node {
+              ...GhostAuthorFields
+            }
+          }
         }
       }
     `
   );
 
-  return author;
+  return authors.edges[0].node;
 };

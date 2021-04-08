@@ -10,7 +10,7 @@ type Props = {
 };
 
 const PostCard = ({ post }: Props): JSX.Element => {
-  const url = `/${post.slug}/`;
+  const url = `/wrote/${post.slug}/`;
   const readingTime = readingTimeHelper(post);
 
   return (
