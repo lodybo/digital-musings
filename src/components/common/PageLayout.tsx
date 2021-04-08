@@ -6,7 +6,7 @@ import '../../styles/global.css';
 import Header from '../Header';
 
 type Props = {
-  title: string;
+  title?: string;
   children: ReactNode;
 };
 
@@ -29,16 +29,25 @@ const PageLayout = ({ title, children }: Props): JSX.Element => {
             font-body
             bg-primary-light
             text-black
+            flex
+            flex-col
           "
         />
       </Helmet>
 
       <Header title={title} />
 
-      <main>{children}</main>
+      <main
+        className="
+          flex-auto
+        "
+      >
+        {children}
+      </main>
 
       <footer
         className="
+          flex-shrink-0
           bg-tertiary-light
           text-primary-dark
           p-10

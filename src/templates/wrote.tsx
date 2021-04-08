@@ -47,7 +47,7 @@ const Wrote = ({ data, location, pageContext }: Props): JSX.Element => {
             className="
               grid
               grid-cols-1
-              xl:grid-cols-2
+              lg:grid-cols-2
             "
           >
             {posts.map(({ node }) => (

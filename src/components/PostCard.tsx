@@ -42,6 +42,7 @@ const PostCard = ({ post }: Props): JSX.Element => {
           {
             'flex-initial': post.feature_image,
             'sm:flex-none': post.feature_image,
+            hidden: !post.feature_image,
           }
         )}
         style={{
