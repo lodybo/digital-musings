@@ -67,6 +67,10 @@ module.exports = {
     extend: {
       margin: ['hover'],
       padding: ['hover'],
+      ringWidth: ['focus-visible'],
+      ringColor: ['focus-visible'],
+      ringOffsetWidth: ['focus-visible'],
+      ringOffsetColor: ['focus-visible'],
     },
     zIndex: false,
   },

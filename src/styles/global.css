@@ -3,6 +3,34 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply box-border
+  }
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  a {
+    @apply
+      no-underline
+      outline-none
+      inline-block
+      pb-0.5
+      text-tertiary-light
+      border-b-2
+      border-tertiary-light
+      border-solid
+      cursor-pointer
+      hover:text-tertiary-dark
+      hover:border-tertiary-dark
+      focus-visible:ring
+      focus-visible:ring-offset-2
+      focus-visible:ring-secondary-dark
+      transition
+    ;
+  }
+
   h1 {
     @apply text-2xl font-heading;
   }
@@ -28,10 +56,15 @@
   }
 }
 
-html {
-  box-sizing: border-box;
-}
-
-*, *:before, *:after {
-  box-sizing: inherit;
+@layer components {
+  .reset-link-styles {
+    @apply
+    pb-0
+    border-b-0
+    transition-none
+    text-black
+    hover:text-black
+    focus-visible:ring-0
+    ;
+  }
 }

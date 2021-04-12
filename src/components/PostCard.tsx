@@ -17,7 +17,8 @@ const PostCard = ({ post }: Props): JSX.Element => {
     <Link
       to={url}
       className="
-      group
+        reset-link-styles
+        group
         flex
         flex-col
         sm:flex-row
