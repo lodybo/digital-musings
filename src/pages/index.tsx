@@ -18,9 +18,10 @@ const indexPage = ({ data }: Props): JSX.Element => {
   const posts = data.posts.nodes;
 
   return (
-    <PageLayout>
-      <div
-        className="
+    <>
+      <PageLayout>
+        <div
+          className="
           flex
           flex-col
           flex-initial
@@ -29,86 +30,87 @@ const indexPage = ({ data }: Props): JSX.Element => {
           mx-10
           items-center
         "
-      >
-        {profile_image && (
-          <img
-            className="
+        >
+          {profile_image && (
+            <img
+              className="
               mb-5
               mr-0
               sm:mb-0
               sm:mr-10
             "
-            src={profile_image}
-            alt={name}
-          />
-        )}
+              src={profile_image}
+              alt={name}
+            />
+          )}
 
-        <div>
-          <h1
-            className="
+          <div>
+            <h1
+              className="
               text-3xl
               sm:text-4xl
               md:text-6xl
             "
-          >
-            Hello, I&apos;m Lody
-          </h1>
+            >
+              Hello, I&apos;m Lody
+            </h1>
 
-          <p
-            className="
+            <p
+              className="
               text-lg
               sm:text-2xl
               md:text-4xl
             "
-          >
-            Born and raised in The Netherlands, currently work for &nbsp;
-            <a
-              href="https://www.taf.nl"
-              target="_blank"
-              rel="noopener noreferrer"
             >
-              TAF B.V.
-            </a>
-            , and I occasionally &nbsp;
-            <a
-              href="https://www.themarch.nl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              make music too
-            </a>
-          </p>
+              Born and raised in The Netherlands, currently work for &nbsp;
+              <a
+                href="https://www.taf.nl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                TAF B.V.
+              </a>
+              , and I occasionally &nbsp;
+              <a
+                href="https://www.themarch.nl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                make music too
+              </a>
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div
-        className="
+        <div
+          className="
           mt-10
           mx-10
           sm:mx-20
         "
-      >
-        <h2>I&apos;ve written a few things...</h2>
-        <p>
-          <Link to="/wrote">
-            And here&apos;s some more if you wanna read...
-          </Link>
-        </p>
+        >
+          <h2>I&apos;ve written a few things...</h2>
+          <p>
+            <Link to="/wrote">
+              And here&apos;s some more if you wanna read...
+            </Link>
+          </p>
 
-        <div
-          className="
+          <div
+            className="
             mt-10
             grid
             grid-cols-1
             lg:grid-cols-2
           "
-        >
-          {posts.map((post) => (
-            <PostCard key={post.id} post={post} />
-          ))}
+          >
+            {posts.map((post) => (
+              <PostCard key={post.id} post={post} />
+            ))}
+          </div>
         </div>
-      </div>
-    </PageLayout>
+      </PageLayout>
+    </>
   );
 };
 

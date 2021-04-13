@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 
@@ -27,7 +26,7 @@ const Page = ({ data, location }: Props): JSX.Element => {
 
   return (
     <>
-      <MetaData data={page} location={location} />
+      <MetaData data={page} title="What I wrote | Lodybo" location={location} />
       <Helmet>
         <style type="text/css">{`${page.codeinjection_styles}`}</style>
       </Helmet>
@@ -46,18 +45,6 @@ const Page = ({ data, location }: Props): JSX.Element => {
       </PageLayout>
     </>
   );
-};
-
-Page.propTypes = {
-  data: PropTypes.shape({
-    ghostPage: PropTypes.shape({
-      codeinjection_styles: PropTypes.object,
-      title: PropTypes.string.isRequired,
-      html: PropTypes.string.isRequired,
-      feature_image: PropTypes.string,
-    }).isRequired,
-  }).isRequired,
-  location: PropTypes.object.isRequired,
 };
 
 export default Page;

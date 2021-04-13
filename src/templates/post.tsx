@@ -7,12 +7,14 @@ import Prism from 'prismjs';
 // @ts-ignore
 import reframe from 'reframe.js';
 
-import { PostLayout } from '../components/common';
+import { PageLayout } from '../components/common';
 import { MetaData } from '../components/common/meta';
 import { PostOrPage } from '@tryghost/content-api';
 import PostMeta from '../components/PostMeta';
 
 import '../../node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css';
+import { Navigation } from '../components/common';
+import { useGhostSettings } from '../components/common/hooks/ghostSettings';
 
 /**
  * Todo: Check if images in a post are processed via Gatsby.
@@ -36,6 +38,7 @@ type Props = {
  */
 const Post = ({ data, location }: Props): JSX.Element => {
   const post = data.ghostPost;
+  const { navigation } = useGhostSettings();
 
   useEffect(() => {
     reframe('iframe');
@@ -67,7 +70,7 @@ const Post = ({ data, location }: Props): JSX.Element => {
       <Helmet>
         <style type="text/css">{`${post.codeinjection_styles}`}</style>
       </Helmet>
-      <PostLayout>
+      <PageLayout contentIsPost>
         <article>
           {post.feature_image ? (
             <figure
@@ -88,6 +91,8 @@ const Post = ({ data, location }: Props): JSX.Element => {
               />
             </figure>
           ) : null}
+
+          <Navigation navigation={navigation} />
 
           <section
             className="
@@ -124,7 +129,7 @@ const Post = ({ data, location }: Props): JSX.Element => {
             />
           </section>
         </article>
-      </PostLayout>
+      </PageLayout>
     </>
   );
 };

@@ -1,27 +1,35 @@
 import React from 'react';
-// import { Navigation } from './common';
+import { Navigation } from './common';
+import { useGhostSettings } from './common/hooks/ghostSettings';
 
 type Props = {
   title?: string;
 };
 
-const Header = ({ title }: Props): JSX.Element => (
-  <div
-    className="
-      p-10
-    "
-  >
-    {!!title && (
-      <h1
+const Header = ({ title }: Props): JSX.Element => {
+  const { navigation } = useGhostSettings();
+
+  return (
+    <>
+      <Navigation navigation={navigation} />
+
+      <div
         className="
-            text-5xl
-          "
+        p-10
+      "
       >
-        {title}
-      </h1>
-    )}
-    {/*<Navigation data={navigation} navClass={'site-navi'} />*/}
-  </div>
-);
+        {!!title && (
+          <h1
+            className="
+              text-5xl
+            "
+          >
+            {title}
+          </h1>
+        )}
+      </div>
+    </>
+  );
+};
 
 export default Header;

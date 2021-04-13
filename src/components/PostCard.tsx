@@ -85,7 +85,12 @@ const PostCard = ({ post }: Props): JSX.Element => {
         >
           {post.tags && post.tags.length > 0 && (
             <div>
-              <Tags post={post} visibility="public" autolink={false} />
+              <Tags
+                post={post}
+                visibility="public"
+                autolink={false}
+                separator=",&nbsp;"
+              />
             </div>
           )}
           <p>{readingTime}</p>

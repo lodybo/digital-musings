@@ -2,7 +2,7 @@ import React from 'react';
 import { Author, Nullable, PostOrPage } from '@tryghost/content-api';
 import { readingTime } from '@tryghost/helpers';
 import classNames from 'classnames';
-import isEqual from 'date-fns/isEqual';
+import isSameDay from 'date-fns/isSameDay';
 import { Tags } from '@tryghost/helpers-gatsby';
 
 type Props = {
@@ -23,7 +23,7 @@ const PostMeta = ({ author, post }: Props): JSX.Element => {
       return true;
     }
 
-    return isEqual(new Date(createdDate), new Date(updatedDate));
+    return isSameDay(new Date(createdDate), new Date(updatedDate));
   };
 
   return (
