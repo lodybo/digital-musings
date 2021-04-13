@@ -1,3 +1,29 @@
+const disabledGhostOverrides = {
+  '.kg-bookmark-card img': {
+    'margin-top': '0',
+    'margin-bottom': '0',
+  },
+  '.kg-bookmark-content *': {},
+  '.kg-bookmark-title *': {},
+  '.kg-bookmark-description *': {},
+  '.kg-bookmark-thumbnail *': {},
+  '.kg-bookmark-metadata *': {},
+  '.kg-bookmark-icon *': {},
+  '.kg-bookmark-author *': {},
+  '.kg-bookmark-publisher *': {},
+  '.kg-gallery-container *': {},
+  '.kg-gallery-row *': {},
+  '.kg-gallery-image img': {
+    'margin-top': '0',
+    'margin-bottom': '0',
+  },
+  '.kg-gallery-card': {
+    'margin-top': '0',
+    'margin-bottom': '0',
+  },
+  '.kg-image-card *': {},
+};
+
 module.exports = {
   purge: ['./src/**/*.tsx'],
   darkMode: 'class',
@@ -7,6 +33,32 @@ module.exports = {
         DEFAULT: {
           css: {
             color: theme('colors.black'),
+            a: {
+              color: 'inherit',
+              textDecoration: 'inherit',
+              fontWeight: 'inherit',
+            },
+            ...disabledGhostOverrides,
+          },
+        },
+        sm: {
+          css: {
+            ...disabledGhostOverrides,
+          },
+        },
+        lg: {
+          css: {
+            ...disabledGhostOverrides,
+          },
+        },
+        xl: {
+          css: {
+            ...disabledGhostOverrides,
+          },
+        },
+        '2xl': {
+          css: {
+            ...disabledGhostOverrides,
           },
         },
       }),

@@ -16,7 +16,6 @@
       no-underline
       outline-none
       inline-block
-      pb-0.5
       text-tertiary-light
       border-b-2
       border-tertiary-light
@@ -26,6 +25,7 @@
       hover:border-tertiary-dark
       focus-visible:ring
       focus-visible:ring-offset-2
+      focus-visible:ring-offset-secondary-light
       focus-visible:ring-secondary-dark
       transition
     ;
@@ -66,5 +66,194 @@
     hover:text-black
     focus-visible:ring-0
     ;
+  }
+
+  .kg-bookmark-card {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .kg-bookmark-container {
+    display: flex;
+    min-height: 148px;
+    color: inherit;
+    font-family: inherit;
+    text-decoration: none;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px -1px rgba(0, 0, 0, 0.15), 0 0 1px 0px rgba(0, 0, 0, 0.09);
+    @apply transition;
+  }
+
+  .kg-bookmark-container:hover {
+    color: inherit;
+    text-decoration: none;
+    box-shadow: 0 2px 7px 3px rgba(0, 0, 0, 0.15), 0 0 2px 1px rgba(0, 0, 0, 0.09);
+    @apply bg-secondary-light;
+  }
+
+  .kg-bookmark-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .kg-bookmark-title {
+    color: inherit;
+    font-size: 1.6rem;
+    line-height: 1.5em;
+    font-weight: 600;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .kg-bookmark-container:hover .kg-bookmark-title {
+    color: inherit;
+  }
+
+  .kg-bookmark-description {
+    display: -webkit-box;
+    overflow-y: hidden;
+    margin-top: 0.5rem;
+    max-height: 48px;
+    color: inherit;
+    font-size: 1rem;
+    line-height: 1.5em;
+    font-weight: 400;
+
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .kg-bookmark-thumbnail {
+    position: relative;
+    min-width: 33%;
+    max-height: 100%;
+  }
+
+  .kg-bookmark-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 3px 3px 0;
+
+    object-fit: cover;
+
+    /** Override for Tailwind's prose */
+    /*margin: 0 !important;*/
+  }
+
+  .kg-bookmark-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 14px;
+    color: inherit;
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+
+  .kg-bookmark-icon {
+    margin-right: 8px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .kg-bookmark-author {
+    line-height: 1.5em;
+  }
+
+  .kg-bookmark-author:after {
+    content: "•";
+    margin: 0 6px;
+  }
+
+  .kg-bookmark-publisher {
+    overflow: hidden;
+    max-width: 240px;
+    line-height: 1.5em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Gallery Styles
+  /* ---------------------------------------------------------- */
+  .kg-gallery-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .kg-gallery-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .kg-gallery-image img {
+    display: block;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .kg-gallery-row:not(:first-of-type) {
+    margin: 0.75em 0 0 0;
+  }
+
+  .kg-gallery-image:not(:first-of-type) {
+    margin: 0 0 0 0.75em;
+  }
+
+  .kg-gallery-card + .kg-image-card.kg-width-wide,
+  .kg-gallery-card + .kg-gallery-card,
+  .kg-image-card.kg-width-wide + .kg-gallery-card,
+  .kg-image-card.kg-width-wide + .kg-image-card.kg-width-wide {
+    margin-top: .75rem;
+    margin-bottom: .75rem;
+  }
+
+  .kg-width-wide img {
+    max-width: 85vw;
+  }
+
+  .kg-width-full img {
+    max-width: 100vw;
+  }
+
+  .kg-width-wide {
+    position: relative;
+    width: 85vw;
+    min-width: 100%;
+    margin: auto calc(50% - 50vw);
+    transform: translateX(calc(50vw - 50%));
+  }
+
+  .kg-width-full {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  .fluid-width-video-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+  }
+
+  .fluid-width-video-wrapper iframe,
+  .fluid-width-video-wrapper object,
+  .fluid-width-video-wrapper embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 }

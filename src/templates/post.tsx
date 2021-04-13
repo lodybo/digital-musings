@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
+import Prism from 'prismjs';
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import reframe from 'reframe.js';
 
 import { PostLayout } from '../components/common';
 import { MetaData } from '../components/common/meta';
 import { PostOrPage } from '@tryghost/content-api';
 import PostMeta from '../components/PostMeta';
+
+import '../../node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css';
 
 /**
  * Todo: Check if images in a post are processed via Gatsby.
@@ -29,6 +36,30 @@ type Props = {
  */
 const Post = ({ data, location }: Props): JSX.Element => {
   const post = data.ghostPost;
+
+  useEffect(() => {
+    reframe('iframe');
+
+    const images = document.querySelectorAll<HTMLImageElement>(
+      '.kg-gallery-image img'
+    );
+    if (images.length) {
+      images.forEach(function (image) {
+        const container = image.closest('.kg-gallery-image') as HTMLDivElement;
+        if (container) {
+          const width = image.width;
+          const height = image.height;
+          const ratio = width / height;
+          container.style.flex = ratio + ' 1 0%';
+        }
+      });
+    }
+
+    document.querySelectorAll('pre[class*=language-]').forEach(function (node) {
+      node.classList.add('line-numbers');
+    });
+    setTimeout(Prism.highlightAll);
+  });
 
   return (
     <>

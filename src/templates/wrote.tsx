@@ -54,9 +54,9 @@ const Wrote = ({ data, location, pageContext }: Props): JSX.Element => {
               // The tag below includes the markup for each post - components/common/PostCard.tsx
               <PostCard key={node.id} post={node} />
             ))}
-
-            <Pagination pageContext={pageContext} />
           </section>
+
+          <Pagination pageContext={pageContext} />
         </div>
       </PageLayout>
     </>

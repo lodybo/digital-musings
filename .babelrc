@@ -1,0 +1,24 @@
+{
+  "presets": ["babel-preset-gatsby"],
+  "plugins": [
+    ["prismjs", {
+      "languages": [
+        "markup",
+        "css",
+        "javascript",
+        "bash",
+        "docker",
+        "git",
+        "jsdoc",
+        "json",
+        "php",
+        "jsx",
+        "tsx",
+        "typescript"
+      ],
+      "plugins": ["line-numbers", "autolinker"],
+      "theme": "tomorrow",
+      "css": true
+    }]
+  ]
+}

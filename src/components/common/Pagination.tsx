@@ -35,6 +35,11 @@ const Pagination = ({ pageContext }: Props): JSX.Element | null => {
       'rounded',
       'transition',
       'hover:bg-primary',
+      'outline-none',
+      'focus-visible:ring',
+      'focus-visible:ring-offset-2',
+      'focus-visible:ring-offset-secondary-light',
+      'focus-visible:ring-secondary-dark',
       {
         'pointer-events-none': flag,
         'text-primary-dark': flag,

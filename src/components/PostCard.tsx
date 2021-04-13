@@ -29,6 +29,11 @@ const PostCard = ({ post }: Props): JSX.Element => {
         sm:hover:shadow
         sm:hover:ml-0.5
         sm:hover:bg-primary-dark
+        outline-none
+        focus-visible:ring
+        focus-visible:ring-offset-2
+        focus-visible:ring-offset-secondary-light
+        focus-visible:ring-secondary-dark
       "
     >
       <div

@@ -24,7 +24,7 @@
   ],
   "main": "n/a",
   "scripts": {
-    "start": "gatsby develop",
+    "start": "gatsby develop -H 0.0.0.0",
     "serve": "gatsby build && NODE_ENV=production gatsby serve",
     "build": "gatsby build",
     "dev": "gatsby develop",
@@ -34,6 +34,7 @@
   "devDependencies": {
     "@tryghost/content-api": "^1.5.2",
     "@types/node": "^14.14.37",
+    "@types/prismjs": "^1.16.5",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@types/react-helmet": "^6.1.0",
@@ -52,6 +53,7 @@
     "gatsby-plugin-postcss": "^4.2.0",
     "postcss": "^8.2.9",
     "prettier": "^2.2.1",
+    "prismjs": "^1.23.0",
     "tailwindcss": "^2.0.4",
     "typescript": "^4.2.3"
   },
@@ -64,6 +66,8 @@
     "@tailwindcss/typography": "^0.4.0",
     "@tryghost/helpers": "1.1.40",
     "@tryghost/helpers-gatsby": "1.0.45",
+    "babel-plugin-prismjs": "^2.0.1",
+    "babel-preset-gatsby": "^1.2.0",
     "cheerio": "1.0.0-rc.5",
     "classnames": "^2.3.1",
     "gatsby": "2.32.11",
@@ -83,6 +87,7 @@
     "lodash": "4.17.21",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-helmet": "6.1.0"
+    "react-helmet": "6.1.0",
+    "reframe.js": "^3.0.2"
   }
 }
