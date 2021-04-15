@@ -1,19 +1,19 @@
 {
-  "name": "gatsby-starter-ghost",
-  "description": "A starter template to build lightning fast websites with Ghost and Gatsby",
+  "name": "lodybo-ghost-gatsby-theme",
+  "description": "Code for my Gatsby Ghost theme.",
   "version": "1.0.0",
   "license": "MIT",
-  "author": "Ghost Foundation",
-  "homepage": "https://docs.ghost.org/api/gatsby/",
+  "author": "Lody Borgers",
+  "homepage": "https://www.lodybo.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tryghost/gatsby-starter-ghost.git"
+    "url": "git+https://github.com/lodybo/digital-musings.git"
   },
   "resolutions": {
     "sharp": "0.27.1"
   },
   "engines": {
-    "node": ">= 10.13.0"
+    "node": ">= 14.15.0"
   },
   "bugs": {
     "url": "https://github.com/tryghost/gatsby-starter-ghost/issues"
