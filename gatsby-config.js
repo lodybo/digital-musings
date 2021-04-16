@@ -15,6 +15,7 @@ let ghostConfig = {
     contentApiKey: process.env.PRODUCTION_GHOST_API_KEY,
   },
 };
+console.log(ghostConfig.production);
 
 if (
   process.env.NODE_ENV === 'production' &&
