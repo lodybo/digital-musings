@@ -11,8 +11,8 @@ let ghostConfig = {
     contentApiKey: process.env.GHOST_API_KEY,
   },
   production: {
-    apiUrl: process.env.GHOST_URL,
-    contentApiKey: process.env.GHOST_API_KEY,
+    apiUrl: process.env.PRODUCTION_GHOST_URL,
+    contentApiKey: process.env.PRODUCTION_GHOST_API_KEY,
   },
 };
 
