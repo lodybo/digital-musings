@@ -12,7 +12,7 @@ module.exports = {
   shareImageHeight: 523, // Change to the height of your default share image
 
   shortTitle: `Lodybo`, // Used for App manifest e.g. Mobile Home Screen
-  siteIcon: `favicon.png`, // Logo in /static dir used for SEO, RSS, and App manifest
+  siteIcon: `favicon.ico`, // Logo in /static dir used for SEO, RSS, and App manifest
   backgroundColor: config.theme.colors.white.DEFAULT, // Used for Offline Manifest
   themeColor: config.theme.colors.primary.DEFAULT, // Used for Offline Manifest
 };
