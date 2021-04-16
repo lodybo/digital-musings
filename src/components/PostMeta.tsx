@@ -2,7 +2,6 @@ import React from 'react';
 import { Author, Nullable, PostOrPage } from '@tryghost/content-api';
 import { readingTime } from '@tryghost/helpers';
 import classNames from 'classnames';
-import isSameDay from 'date-fns/isSameDay';
 import { Tags } from '@tryghost/helpers-gatsby';
 
 type Props = {
@@ -12,18 +11,14 @@ type Props = {
 
 const PostMeta = ({ author, post }: Props): JSX.Element => {
   const postIsNotUpdated = (
-    createdDate: string | undefined,
-    updatedDate: Nullable<string> | undefined
+    createdDatePretty: string | undefined,
+    updatedDatePretty: string | undefined
   ): boolean => {
-    if (
-      createdDate === undefined ||
-      updatedDate === undefined ||
-      updatedDate === null
-    ) {
+    if (createdDatePretty === undefined || updatedDatePretty === undefined) {
       return true;
     }
 
-    return isSameDay(new Date(createdDate), new Date(updatedDate));
+    return createdDatePretty === updatedDatePretty;
   };
 
   return (
@@ -82,7 +77,10 @@ const PostMeta = ({ author, post }: Props): JSX.Element => {
 
         <p
           className={classNames('text-secondary', {
-            hidden: postIsNotUpdated(post.created_at, post.updated_at),
+            hidden: postIsNotUpdated(
+              post.created_at_pretty,
+              post.updated_at_pretty
+            ),
           })}
         >
           Last updated on: <br />
