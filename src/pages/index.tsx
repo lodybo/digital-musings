@@ -62,7 +62,7 @@ const indexPage = ({ data }: Props): JSX.Element => {
               md:text-4xl
             "
             >
-              Born and raised in The Netherlands, currently work for &nbsp;
+              Born and raised in The Netherlands, currently work for&nbsp;
               <a
                 href="https://www.taf.nl"
                 target="_blank"
@@ -70,14 +70,23 @@ const indexPage = ({ data }: Props): JSX.Element => {
               >
                 TAF B.V.
               </a>
-              , and I occasionally &nbsp;
+              , and I occasionally&nbsp;
               <a
                 href="https://www.themarch.nl"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                make music too
+                make
               </a>
+              &nbsp;
+              <a
+                href="https://www.borgersfamilie.nl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                music
+              </a>
+              &nbsp;too.
             </p>
           </div>
         </div>
