@@ -1,3 +1,7 @@
+import '@fontsource/bungee/400.css';
+import '@fontsource/roboto-slab/400.css';
+import '@fontsource/roboto-slab/500.css';
+
 /* eslint-disable */
 /**
  * Trust All Scripts
@@ -9,24 +13,26 @@
  * via ids/classnames etc.
  *
  */
-var trustAllScripts = function () {
-    var scriptNodes = document.querySelectorAll('.load-external-scripts script');
+const trustAllScripts = () => {
+  const scriptNodes = document.querySelectorAll(
+    '.load-external-scripts script'
+  );
 
-    for (var i = 0; i < scriptNodes.length; i += 1) {
-        var node = scriptNodes[i];
-        var s = document.createElement('script');
-        s.type = node.type || 'text/javascript';
+  for (let i = 0; i < scriptNodes.length; i += 1) {
+    const node = scriptNodes[i];
+    const s = document.createElement('script');
+    s.type = node.type || 'text/javascript';
 
-        if (node.attributes.src) {
-            s.src = node.attributes.src.value;
-        } else {
-            s.innerHTML = node.innerHTML;
-        }
-
-        document.getElementsByTagName('head')[0].appendChild(s);
+    if (node.attributes.src) {
+      s.src = node.attributes.src.value;
+    } else {
+      s.innerHTML = node.innerHTML;
     }
+
+    document.getElementsByTagName('head')[0].appendChild(s);
+  }
 };
 
-exports.onRouteUpdate = function () {
-    trustAllScripts();
+export const onRouteUpdate = function () {
+  trustAllScripts();
 };
