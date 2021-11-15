@@ -17,12 +17,8 @@ const PageLayout = ({
   children,
   contentIsPost = false,
 }: Props): JSX.Element => {
-  const {
-    lang,
-    codeinjection_styles,
-    codeinjection_head,
-    codeinjection_foot,
-  } = useGhostSettings();
+  const { lang, codeinjection_styles, codeinjection_head, codeinjection_foot } =
+    useGhostSettings();
 
   const triggerMailToLink = () => {
     window.open('mailto:hi@lodybo.nl', '_blank');
@@ -33,11 +29,7 @@ const PageLayout = ({
       <Helmet>
         <html lang={lang || 'en'} />
         <style type="text/css">{`${codeinjection_styles}`}</style>
-        <script
-          defer
-          data-domain="lodybo.com"
-          src="https://plausible.io/js/plausible.js"
-        />
+        <script defer data-domain="lodybo.com" src="/js/measurements.js" />
         {codeinjection_head}
         <body
           className="

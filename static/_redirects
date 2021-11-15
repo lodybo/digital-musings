@@ -3,3 +3,6 @@
 
 https://gatsby-starter-ghost.netlify.com/*      https://gatsby.ghost.org/:splat    301!
 http://gatsby-starter-ghost.netlify.com/*       https://gatsby.ghost.org/:splat    301!
+
+/js/measurements.js https://plausible.io/js/plausible.js 200
+/api/event https://plausible.io/api/event 202
