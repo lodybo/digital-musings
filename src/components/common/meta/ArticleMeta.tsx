@@ -1,10 +1,10 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import _ from 'lodash';
-import url from 'url';
 
 import getAuthorProperties from './getAuthorProperties';
 import ImageMeta from './ImageMeta';
+import { resolve } from '../../../utils/url-resolve';
 import config from '../../../utils/siteConfig';
 import { PostOrPage, Tag } from '@tryghost/content-api';
 import { useGhostSettings } from '../hooks/ghostSettings';
@@ -31,7 +31,7 @@ const ArticleMetaGhost = ({ data, canonical }: Props): JSX.Element => {
     : _.get(settings, 'cover_image', null);
   const publisherLogo =
     settings.logo || config.siteIcon
-      ? url.resolve(config.siteUrl, settings.logo || config.siteIcon)
+      ? resolve(config.siteUrl, settings.logo || config.siteIcon)
       : null;
 
   const jsonLd = {

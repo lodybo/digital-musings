@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import _ from 'lodash';
-import url from 'url';
 
 import ImageMeta from './ImageMeta';
+import { resolve } from '../../../utils/url-resolve';
 import config from '../../../utils/siteConfig';
 import { PostOrPage, Tag } from '@tryghost/content-api';
 import { useGhostSettings } from '../hooks/ghostSettings';
@@ -27,14 +27,14 @@ const WebsiteMeta = ({
 }: Props): JSX.Element => {
   const settings = useGhostSettings();
 
-  const publisherLogo = url.resolve(
+  const publisherLogo = resolve(
     config.siteUrl,
     settings.logo || config.siteIcon
   );
   let shareImage =
     image || data.feature_image || _.get(settings, 'cover_image', null);
 
-  shareImage = shareImage ? url.resolve(config.siteUrl, shareImage) : null;
+  shareImage = shareImage ? resolve(config.siteUrl, shareImage) : null;
 
   description =
     description ||

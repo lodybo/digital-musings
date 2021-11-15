@@ -1,6 +1,6 @@
 import React from 'react';
-import url from 'url';
 
+import { resolve } from '../../../utils/url-resolve';
 import config from '../../../utils/siteConfig';
 import ArticleMeta from './ArticleMeta';
 import WebsiteMeta from './WebsiteMeta';
@@ -49,7 +49,7 @@ const MetaData = ({
   image,
   location,
 }: Props): JSX.Element => {
-  const canonical = url.resolve(config.siteUrl, location.pathname);
+  const canonical = resolve(config.siteUrl, location.pathname);
   const settings = useGhostSettings();
 
   if (dataIsPost(data)) {
@@ -66,7 +66,7 @@ const MetaData = ({
       description || config.siteDescriptionMeta || settings.description;
     image = image || settings.cover_image || null;
 
-    image = image ? url.resolve(config.siteUrl, image) : null;
+    image = image ? resolve(config.siteUrl, image) : null;
 
     return (
       <WebsiteMeta
