@@ -33,6 +33,11 @@ const PageLayout = ({
       <Helmet>
         <html lang={lang || 'en'} />
         <style type="text/css">{`${codeinjection_styles}`}</style>
+        <script
+          defer
+          data-domain="lodybo.com"
+          src="https://plausible.io/js/plausible.js"
+        />
         {codeinjection_head}
         <body
           className="
